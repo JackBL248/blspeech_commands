@@ -15,7 +15,6 @@ CLASSES_DICT = {command[1]: command[0] for command in enumerate(CLASSES)}
 
 def preprocess_datapoint(
     wavfile,
-    label,
     classes_dict=CLASSES_DICT,
     deltas=False
 ):
@@ -49,7 +48,8 @@ def preprocess_datapoint(
     else:  # by using the same spectrogram for each of the three channels
         feats = np.array([spec, spec, spec])
         feats
-    label = classes_dict[label]
+    command = wavfile.split("_")[0]
+    label = classes_dict[command]
 
     return feats, label
 
