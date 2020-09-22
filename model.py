@@ -10,14 +10,75 @@ from config import Config
 
 class Model(object):
 
-    def __init__(self, model_type):
+    def __init__(self, model_type, dropout):
         self.device = torch.device(
             "cuda:0" if torch.cuda.is_available() else "cpu"
-            )
+        )
         if model_type == "alexnet":
-            self.model = models.alexnet(pretrained=True)
-            self.model.classifier[6] = nn.Linear(4096, Config.NUM_CLASSES)
+            self.model = models.alexnet(pretrained=False)
+            self.model.classifier[6] = nn.Sequential(
+                nn.Dropout(dropout),
+                nn.Linear(
+                    in_features=4096,
+                    out_features=Config.NUM_CLASSES
+            )
             self.model = self.model.to(self.device)
+
+        if model_type == "resnet18":
+            self.model = models.resnet18(pretrained=False)
+            num_ftrs = self.model.fc.in_features
+            classifier = nn.Sequential(
+                nn.Dropout(dropout),
+                nn.Linear(
+                    in_features=num_ftrs,
+                    out_features=Config.NUM_CLASSES
+                )
+            )
+            self.model.fc = classifier
+            self.model = self.model.to(self.device)
+
+        if model_type == "resnet34":
+            self.model = models.resnet34(pretrained=False)
+            num_ftrs = self.model.fc.in_features
+            classifier = nn.Sequential(
+                nn.Dropout(dropout),
+                nn.Linear(
+                    in_features=num_ftrs,
+                    out_features=Config.NUM_CLASSES
+                )
+            )
+            self.model.fc = classifier
+            self.model = self.model.to(self.device)
+
+        if model_type == "resnet50":
+            self.model = models.resnet50(pretrained=False)
+            num_ftrs = self.model.fc.in_features
+            classifier = nn.Sequential(
+                nn.Dropout(dropout),
+                nn.Linear(
+                    in_features=num_ftrs,
+                    out_features=Config.NUM_CLASSES
+                )
+            )
+            self.model.fc = classifier
+            self.model = self.model.to(self.device)
+
+        if model_type == "densenet121":
+            self.model = models.densenet121(pretrained=False)
+            classifier = nn.Sequential(
+                nn.Dropout(dropout),
+                nn.Linear(
+                    in_features=1024,
+                    out_features=Config.NUM_CLASSES
+                )
+            )
+            self.model.classifier = classifier
+            self.model = self.model.to(self.device)
+
+        else:
+            raise ValueError("Model type not recognised. \
+                Please use one of the following models: alexnet, resnet18, \
+                resnet34, resnet50 or densenet121")
 
     def train_model(
         self,
