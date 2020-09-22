@@ -3,13 +3,7 @@ import essentia
 import essentia.standard as ess
 from scipy.signal import butter, filtfilt
 
-
-# vars
-WINDOW_SIZE = 1024
-FFT_SIZE = 1024
-HOP_SIZE = 512
-WINDOW_TYPE = 'hann'
-FS = 16000
+from config import Config
 
 
 def preemphasis(input_vector, fs):
@@ -42,11 +36,11 @@ def preemphasis(input_vector, fs):
 
 def extract_features(
     x,
-    M=WINDOW_SIZE,
-    N=FFT_SIZE,
-    H=HOP_SIZE,
-    fs=FS,
-    window_type=WINDOW_TYPE
+    M=Config.WINDOW_SIZE,
+    N=Config.FFT_SIZE,
+    H=Config.HOP_SIZE,
+    fs=Config.FS,
+    window_type=Config.WINDOW_TYPE
 ):
     '''
     Function that extracts spectrogram from an audio signal
@@ -75,7 +69,7 @@ def extract_features(
         SP.append(mX)
     SP = essentia.array(SP)
     SP = np.power(SP, 2./3.)  # power law compression
-    SP = SP[:, :int(FFT_SIZE/4+1)]
+    SP = SP[:, :int(Config.FFT_SIZE/4+1)]
 
     return SP
 

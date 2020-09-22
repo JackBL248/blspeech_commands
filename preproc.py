@@ -4,21 +4,14 @@ import librosa
 import torch
 from torch import utils
 
+from config import Config
 from spectrogram import delta_spec, extract_features, preemphasis
 from helper import resize_preds
 
 
-# vars
-LONGEST_SAMPLE = 16000
-
-with open("classes.txt", "r") as f:
-    CLASSES = [command.strip() for command in f.readlines()]
-CLASSES_DICT = {command[1]: command[0] for command in enumerate(CLASSES)}
-
-
 def preprocess_datapoint(
     wavfile,
-    classes_dict=CLASSES_DICT,
+    classes_dict=Config.CLASSES_DICT,
     deltas=False
 ):
     '''
@@ -35,7 +28,7 @@ def preprocess_datapoint(
     # Read in audio
     raw_samples, Fs = librosa.core.load(wavfile, sr=None)
     # Zero pad audio to the longest audio file
-    samples = np.zeros(LONGEST_SAMPLE)
+    samples = np.zeros(Config.LONGEST_SAMPLE)
     samples[:len(raw_samples)] = raw_samples
     # Apply preemphasis
     e_samples = preemphasis(samples, Fs)
