@@ -106,6 +106,4 @@ def prepare_dataset(preds, labels, batch_size, shuffle=True):
         batch_size=batch_size,
         shuffle=shuffle
     )
-    # Get dataset size
-    dataset_size = len(preds)
-    return dataloader, dataset_size
+    return dataloader
