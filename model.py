@@ -86,7 +86,6 @@ class Model(object):
         criterion,
         optimizer,
         dataloaders,
-        dataset_sizes,
         log,
         num_epochs=25,
         patience=15,
@@ -146,9 +145,9 @@ class Model(object):
                     # statistics
                     running_loss += loss.item() * inputs.size(0)
                     running_corrects += torch.sum(preds == labels.data)
-
-                epoch_loss = running_loss / dataset_sizes[phase]
-                epoch_acc = running_corrects.double() / dataset_sizes[phase]
+                # calculate loss and accuracy for epoch
+                epoch_loss = running_loss / len(dataloaders[phase])
+                epoch_acc = running_corrects.double() / len(dataloaders[phase])
 
                 print('{} Loss: {:.4f} Acc: {:.4f}'.format(
                     phase, epoch_loss, epoch_acc))
