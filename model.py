@@ -81,7 +81,7 @@ class Model(object):
                 Please use one of the following models: alexnet, resnet18, \
                 resnet34, resnet50 or densenet121")
 
-    def train_model(
+    def train(
         self,
         criterion,
         optimizer,
@@ -183,7 +183,7 @@ class Model(object):
         self.model.load_state_dict(best_model_wts)
         return self.model
 
-    def test_model(
+    def test(
         self,
         dataloader
     ):
