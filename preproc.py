@@ -93,53 +93,21 @@ def normalise_datasets(train_preds, val_preds, test_preds):
     return train_preds, val_preds, test_preds
 
 
-def prepare_dataset(
-    train_preds, train_labels,
-    val_preds, val_labels,
-    test_preds, test_labels
-):
+def prepare_dataset(preds, labels, batch_size, shuffle=True):
     # Resize data
-    train_preds = resize_preds(train_preds)
-    val_preds = resize_preds(val_preds)
-    test_preds = resize_preds(test_preds)
+    preds = resize_preds(preds)
     # Convert data to tensor
-    train_preds = torch.Tensor(train_preds)
-    train_labels = torch.Tensor(train_labels)
-    val_preds = torch.Tensor(val_preds)
-    val_labels = torch.Tensor(val_labels)
-    test_preds = torch.Tensor(test_preds)
-    test_labels = torch.Tensor(test_labels)
+    preds = torch.Tensor(preds)
+    labels = torch.Tensor(labels)
     # Convert labels to type long
-    train_labels = torch.Tensor.long(train_labels)
-    val_labels = torch.Tensor.long(val_labels)
-    test_labels = torch.Tensor.long(test_labels)
-    # Create training, validation and test datasets
-    train_dataset = utils.TensorDataset(train_preds, train_labels)
-    val_dataset = utils.TensorDataset(val_preds, val_labels)
-    test_dataset = utils.TensorDataset(test_preds, test_labels)
-    # Create training, validation and test datasets
-    train_dataloader = utils.DataLoader(
-        train_dataset,
-        batch_size=32,
-        shuffle=True)
-    val_dataloader = utils.DataLoader(
-        val_dataset,
-        batch_size=32,
-        shuffle=False)
-    test_dataloader = utils.DataLoader(
-        test_dataset,
-        batch_size=32,
-        shuffle=False)
-    # Create dictionary with train_dataloader and val_dataloader
-    dataloaders = {
-        "train": train_dataloader,
-        "val": val_dataloader,
-        "test": test_dataloader
-    }
-    # Create dictionary with dataset sizes
-    dataset_sizes = {
-        "train": len(train_preds),
-        "val": len(val_preds),
-        "test": len(test_preds)
-    }
-    return dataloaders, dataset_sizes
+    labels = torch.Tensor.long(labels)
+    # Create dataset and dataloader
+    dataset = utils.TensorDataset(preds, labels)
+    dataloader = utils.DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=shuffle
+    )
+    # Get dataset size
+    dataset_size = len(preds)
+    return dataloader, dataset_size
