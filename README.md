@@ -3,5 +3,5 @@ Classification of speech commands from the Google Speech Commands dataset using 
 
 
 ## Data preparation
-Download the Google Speech Commands dataset from https://www.kaggle.com/c/tensorflow-speech-recognition-challenge/data or from https://ai.googleblog.com/2017/08/launching-speech-commands-dataset.html.
+Download the Google Speech Commands dataset from https://www.kaggle.com/c/tensorflow-speech-recognition-challenge/data or from https://ai.googleblog.com/2017/08/launching-speech-commands-dataset.html. Alternatively, use the toy_dataset included in this repo.
 
