@@ -21,6 +21,7 @@ class Model(object):
                 nn.Linear(
                     in_features=4096,
                     out_features=Config.NUM_CLASSES
+                )
             )
             self.model = self.model.to(self.device)
 
@@ -86,6 +87,7 @@ class Model(object):
         optimizer,
         dataloaders,
         dataset_sizes,
+        log,
         num_epochs=25,
         patience=15,
     ):
@@ -98,9 +100,10 @@ class Model(object):
         Returns: trained model with the best weights saved
         -----------------------
         """
+        # time the operation
         since = time.time()
 
-        best_model_wts = copy.deepcopy(model.state_dict())
+        best_model_wts = copy.deepcopy(self.model.state_dict())
         best_acc = 0.0
         best_loss = 1000.00
         # Set counter for early stopping
@@ -182,12 +185,20 @@ class Model(object):
 
     def test_model(
         self,
-        dataloader,
+        dataloader
     ):
+        """
+        Tests a trained neural network on a test dataset.
+        -----------------------
+        Args: dataloader
+
+        Returns: results (accuracy) of the model run on the test dataset
+        -----------------------
+        """
         total = len(dataloader)
         test_correct = 0  # keep track of number of correct predictions
-        all_labels = torch.Tensor().long().to(device)
-        all_preds = torch.Tensor().long().to(device)
+        all_labels = torch.Tensor().long().to(self.device)
+        all_preds = torch.Tensor().long().to(self.device)
 
         for data, labels in dataloader:
             data = data.to(self.device)
@@ -196,7 +207,7 @@ class Model(object):
             _, preds = torch.max(outputs, 1)
             all_labels = torch.cat((all_labels, labels), 0)
             all_preds = torch.cat((all_preds, preds), 0)
-            num_correct = int(torch.sum(preds==labels))
+            num_correct = int(torch.sum(preds == labels))
             test_correct += num_correct
 
         test_accuracy = test_correct / total
