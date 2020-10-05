@@ -2,7 +2,7 @@ import argparse
 
 parser = argparse.ArgumentParser(
     description="Train different CNN architectures on Google Speech Commands")
-# ========================= DataConfigs ==========================
+# ========================= Data Configs ==========================
 parser.add_argument('--train-folder', default="toy_dataset/train", type=str,
                     help='path to train folder')
 parser.add_argument('--val-folder', default="toy_dataset/val", type=str,
@@ -10,7 +10,7 @@ parser.add_argument('--val-folder', default="toy_dataset/val", type=str,
 parser.add_argument('--test-folder', default="toy_dataset/test", type=str,
                     help='path to test folder')
 
-# ========================= ModelConfigs ==========================
+# ========================= Model Configs ==========================
 parser.add_argument('--model-arch', default="resnet18", type=str,
                     help='Type of CNN architecture')
 
