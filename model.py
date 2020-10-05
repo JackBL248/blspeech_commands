@@ -181,7 +181,6 @@ class Model(object):
 
         # load best model weights
         self.model.load_state_dict(best_model_wts)
-        return self.model
 
     def test(
         self,
