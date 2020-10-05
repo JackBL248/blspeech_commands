@@ -15,14 +15,14 @@ def preprocess_datapoint(
     deltas=False
 ):
     '''
-    Function for standardising the length of the audio,
-    applying preemphasis (two filters),
-    generating predictors (stft) and targets
-    and resizing predictors
+    Standardise the length of the audio,
+    Apply preemphasis (two filters),
+    Generate predictors (stft) and targets
+    and resize predictors
     -----------------------
     Input: wavfile
 
-    Output: Features, one-hot label
+    Output: features, integer label
     -----------------------
     '''
     # Read in audio
@@ -50,9 +50,9 @@ def data_from_folder(folder_path):
     '''
     Get preprocessed data and labels from folder.
     -----------------------
-    Input: Folder path
+    Input: folder path
 
-    Output: Predictors and labels
+    Output: predictors and labels
     -----------------------
     '''
     data_path = Path(folder_path)
@@ -70,12 +70,12 @@ def data_from_folder(folder_path):
 
 def normalise_datasets(train_preds, val_preds, test_preds):
     '''
-    Function normalising all predictors based on the mean and standard
+    Normalise all predictors based on the mean and standard
     deviation of the training predictors
     -----------------------
-    Input: Train, validation and test predictors
+    Input: train, validation and test predictors
 
-    Output: Normalised train, validation and test predictors
+    Output: normalised train, validation and test predictors
     -----------------------
     '''
     # Calculate mean and standard deviation of training predictors
@@ -92,6 +92,14 @@ def normalise_datasets(train_preds, val_preds, test_preds):
 
 
 def prepare_dataset(preds, labels, batch_size, shuffle=True):
+    '''
+    Create PyTorch data loaders from preds and labels
+    -----------------------
+    Args: predictors and labels, batch_size(int), shuffle(boolean)
+
+    Output: dataloader
+    -----------------------
+    '''
     # Resize data
     preds = resize_preds(preds)
     # Convert data to tensor
