@@ -2,11 +2,12 @@ import numpy as np
 import os
 import librosa
 import torch
+from pathlib import Path
 from torch import utils
 
 from config import Config
 from spectrogram import delta_spec, extract_features, preemphasis
-from helper import resize_preds
+from helper import get_class_from_filename, resize_preds
 
 
 def preprocess_datapoint(
@@ -42,31 +43,29 @@ def preprocess_datapoint(
     else:  # by using the same spectrogram for each of the three channels
         feats = np.array([spec, spec, spec])
         feats
-    command = wavfile.split("_")[0]
-    label = classes_dict[command]
+    label = get_class_from_filename(wavfile)
     return feats, label
 
 
-def split_data(data_path, files, commands):
+def data_from_folder(folder_path):
     '''
-    Function for splitting audio files into train, validation and test sets
+    Get preprocessed data and labels from folder.
     -----------------------
-    Input: Folder path with all data
+    Input: Folder path
 
-    Output: Train, validation and test predictors and labels
+    Output: Predictors and labels
     -----------------------
     '''
+    data_path = Path(folder_path)
+    audiofiles = data_path.glob("*wav")
     # Initialise predictor and label lists
     preds_list = []
     labels_list = []
-    # iterate through files and commands lists
-    for audio_file, command in zip(files, commands):
-        audio_path = os.path.join(data_path, audio_file)
-        # Preprocess audio file
-        feats, labels = preprocess_datapoint(audio_path, command)
-        # Append features and labels to relevant list
-        preds_list.append(feats)
-        labels_list.append(labels)
+    # iterate through files and append preds and labels to lists
+    for audiof in audiofiles:
+        preds, label = preprocess_datapoint(audiof)
+        preds_list.append(preds)
+        labels_list.append(label)
     return preds_list, labels_list
 
 
