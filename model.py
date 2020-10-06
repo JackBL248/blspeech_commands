@@ -10,8 +10,9 @@ from config import Config
 
 class Model(object):
 
-    def __init__(self, model_type, dropout, device):
+    def __init__(self, model_type, dropout, device, log):
         self.device = device
+        self.log = log
         if model_type == "alexnet":
             self.model = models.alexnet(pretrained=False)
             self.model.classifier[6] = nn.Sequential(
@@ -84,7 +85,6 @@ class Model(object):
         criterion,
         optimizer,
         dataloaders,
-        log,
         num_epochs,
         patience,
     ):
@@ -105,7 +105,7 @@ class Model(object):
         best_loss = 1000.00
         # Set counter for early stopping
         early_stop_counter = 0
-
+        
         for epoch in range(num_epochs):
             print('Epoch {}/{}'.format(epoch, num_epochs - 1))
             print('-' * 10)
@@ -147,8 +147,11 @@ class Model(object):
                 epoch_loss = running_loss / len(dataloaders[phase])
                 epoch_acc = running_corrects.double() / len(dataloaders[phase])
 
-                print('{} Loss: {:.4f} Acc: {:.4f}'.format(
-                    phase, epoch_loss, epoch_acc))
+                text = '{} Loss: {:.4f} Acc: {:.4f}'.format(
+                    phase, epoch_loss, epoch_acc)
+                print(text)
+                with open(self.log, "a+") as f:
+                    f.write(text+"\n")
 
                 # deep copy the model
                 if phase == 'val':
@@ -169,12 +172,19 @@ class Model(object):
 
                 # If loss has not improved for 15 epochs, stop the training
             if early_stop_counter == patience:
+                print("No improvement in loss for 15 epochs. \n")
                 break
 
         time_elapsed = time.time() - since
-        print('Training complete in {:.0f}m {:.0f}s'.format(
-            time_elapsed // 60, time_elapsed % 60))
-        print('Best val Acc: {:4f}'.format(best_acc))
+        # print and write to file info on time and best val accuracy
+        time_text = 'Training complete in {:.0f}m {:.0f}s'.format(
+            time_elapsed // 60, time_elapsed % 60)
+        best_val_text = 'Best val Acc: {:4f}'.format(best_acc)
+        print(time_text)
+        print(best_val_text)
+        with open(self.log, "a+") as f:
+            f.write(time_text+"\n")
+            f.write(best_val_text+"\n")
 
         # load best model weights
         self.model.load_state_dict(best_model_wts)
