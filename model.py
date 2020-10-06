@@ -105,7 +105,7 @@ class Model(object):
         best_loss = 1000.00
         # Set counter for early stopping
         early_stop_counter = 0
-        
+
         for epoch in range(num_epochs):
             print('Epoch {}/{}'.format(epoch, num_epochs - 1))
             print('-' * 10)
@@ -217,4 +217,8 @@ class Model(object):
             test_correct += num_correct
 
         test_accuracy = test_correct / total
+        test_acc_text = 'Test Acc: {:4f}'.format(test_accuracy)
+        print(test_acc_text)
+        with open(self.log, "a+") as f:
+            f.write(test_acc_text+"\n")
         return test_accuracy
