@@ -223,4 +223,5 @@ class Model(object):
         print(test_acc_text)
         with open(self.log, "a+") as f:
             f.write(test_acc_text+"\n")
+            f.write("\n")
         return test_accuracy
