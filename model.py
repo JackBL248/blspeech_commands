@@ -85,8 +85,8 @@ class Model(object):
         optimizer,
         dataloaders,
         log,
-        num_epochs=25,
-        patience=15,
+        num_epochs,
+        patience,
     ):
         """
         Trains a neural network with early stopping.
