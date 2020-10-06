@@ -44,7 +44,7 @@ datasizes = {
 # set CUDA as device if available
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # define model architecture, dropout, cost function and optimizer
-model = Model(args.model_arch, args.dropout, device)
+model = Model(args.model_arch, args.dropout, device, args.log)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.params(), lr=args.lr)
 
@@ -61,7 +61,6 @@ model.train(
     optimizer,
     dataloaders,
     datasizes,
-    args.log,
     args.num_epochs,
     args.patience
 )
