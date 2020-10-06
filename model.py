@@ -147,6 +147,7 @@ class Model(object):
                 epoch_loss = running_loss / len(dataloaders[phase])
                 epoch_acc = running_corrects.double() / len(dataloaders[phase])
 
+                # print and write epoch info to file
                 text = '{} Loss: {:.4f} Acc: {:.4f}'.format(
                     phase, epoch_loss, epoch_acc)
                 print(text)
@@ -217,6 +218,7 @@ class Model(object):
             test_correct += num_correct
 
         test_accuracy = test_correct / total
+        # print and write test accuracy to file
         test_acc_text = 'Test Acc: {:4f}'.format(test_accuracy)
         print(test_acc_text)
         with open(self.log, "a+") as f:
