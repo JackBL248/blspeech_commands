@@ -48,6 +48,13 @@ model = Model(args.model_arch, args.dropout, device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.params(), lr=args.lr)
 
+with open(args.log, "a+") as f:
+    f.write("model_arch:%s learning_rate:%.3f dropout:%.2f\n" % (
+        args.model_arch,
+        args.lr,
+        args.dropout
+        )
+    )
 model.train(
     criterion,
     optimizer,
