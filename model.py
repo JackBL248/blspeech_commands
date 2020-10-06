@@ -10,10 +10,8 @@ from config import Config
 
 class Model(object):
 
-    def __init__(self, model_type, dropout):
-        self.device = torch.device(
-            "cuda:0" if torch.cuda.is_available() else "cpu"
-        )
+    def __init__(self, model_type, dropout, device):
+        self.device = device
         if model_type == "alexnet":
             self.model = models.alexnet(pretrained=False)
             self.model.classifier[6] = nn.Sequential(
