@@ -30,6 +30,9 @@ def get_class_from_filename(filename):
     Output: Class label
     -----------------------
     '''
+    # make sure filename is string
+    if not isinstance(filename, str):
+        filename = str(filename)
     # take the str class name from the filename
     str_label = filename.split("_")[0]
     # get the integer label
