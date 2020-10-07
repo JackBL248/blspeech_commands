@@ -13,6 +13,9 @@ train_preds, train_labels = data_from_folder(args.train_folder)
 val_preds, val_labels = data_from_folder(args.val_folder)
 test_preds, test_labels = data_from_folder(args.test_folder)
 
+if args.verbosity:
+    print("data extracted\n")
+
 # create dictionary of dataloaders and datasizes for train, val and test
 train_dataloader, train_datasize = prepare_dataset(
     train_preds,
@@ -40,6 +43,9 @@ datasizes = {
     "train": train_datasize,
     "val": val_datasize,
 }
+
+if args.verbosity:
+    print("dataloaders created\n")
 
 # set CUDA as device if available
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
