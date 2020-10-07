@@ -27,3 +27,5 @@ parser.add_argument('--lr', '--learning-rate', default=0.001, type=float,
 # ========================= Log Configs ==========================
 parser.add_argument('--log-file', default="log.txt", type=str,
                     help='Destination file for logging results')
+parser.add_argument('--v', '--verbosity', default=False, type=bool,
+                    help='whether to print updates on data preprocessing')
