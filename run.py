@@ -9,6 +9,7 @@ from model import Model
 
 def main():
     args = parser.parse_args()
+    print("working...")
 
     # extract train, val and test data
     train_preds, train_labels = data_from_folder(args.train_folder)
