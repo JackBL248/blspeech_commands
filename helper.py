@@ -33,6 +33,9 @@ def get_class_from_filename(filename):
     # make sure filename is string
     if not isinstance(filename, str):
         filename = str(filename)
+    # make sure to get only the filename and no the name of any parent folder
+    if len(filename.split("/")) > 1:
+        filename = filename.split("/")[-1]
     # take the str class name from the filename
     str_label = filename.split("_")[0]
     # get the integer label
