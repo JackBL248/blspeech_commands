@@ -12,7 +12,7 @@ class spectrogramDataset(data.Dataset):
         print(self.labels[index])
         spectrogram = self.transform(self.preds[index])
         # convert label to torch.Tensor
-        return spectrogram, self.labels[index]
+        return spectrogram, float(self.labels[index])
 
     def __len__(self):
         return len(self.labels)
