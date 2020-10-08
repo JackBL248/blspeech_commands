@@ -15,6 +15,7 @@ class spectrogramDataset(data.Dataset):
         # convert label to torch.Tensor.long type
         label = torch.Tensor.long(torch.Tensor(self.labels[index]))
         print(spectrogram.shape)
+        print(label.shape)
         return spectrogram, label
 
     def __len__(self):
