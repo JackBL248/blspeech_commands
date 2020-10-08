@@ -50,15 +50,15 @@ def main():
 
     train_dataloader = data.DataLoader(
         train_dataset, args.batch,
-        True, num_workers=4
+        True, #num_workers=4
     )
     val_dataloader = data.DataLoader(
         val_dataset, args.batch,
-        False, num_workers=4
+        False, #num_workers=4
     )
     test_dataloader = data.DataLoader(
         test_dataset, args.batch,
-        False, num_workers=4
+        False, #num_workers=4
     )
 
     dataloaders = {
