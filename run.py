@@ -61,10 +61,10 @@ def main():
     # set CUDA as device if available
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     # define model architecture, dropout, cost function and optimizer
-    model = Model(args.model, args.dropout, device, args.log).model
+    model = Model(args.model, args.dropout, device, args.log)
     print(help(model))
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.params(), lr=args.lr)
+    optimizer = optim.Adam(model.model.params(), lr=args.lr)
 
     # write the model arch, lr and dropout to file
     with open(args.log, "a+") as f:
