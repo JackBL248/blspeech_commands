@@ -32,12 +32,11 @@ def main():
         print(train_stds)
 
     # define transforms
-    transform = transforms.Compose(
+    transform = transforms.Compose([
         normaliseSpectrogram(train_means, train_stds),
-        transforms.ToPILImage(),
         transforms.Resize(224),
         transforms.ToTensor(),
-    )
+    ])
     # create dictionary of dataloaders and datasizes for train, val and test
     train_dataset = spectrogramDataset(train_preds, train_labels, transform)
     val_dataset = spectrogramDataset(val_preds, val_labels, transform)
