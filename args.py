@@ -16,7 +16,7 @@ parser.add_argument('-d', '--delta', default=False, type=bool,
                     to fill the two other channels')
 
 # ========================= Model Configs ==========================
-parser.add_argument('--model-arch', default="resnet18", type=str,
+parser.add_argument('--model', default="resnet18", type=str,
                     help='Type of CNN architecture')
 
 # ========================= Learning Configs ==========================
