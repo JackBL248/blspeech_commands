@@ -1,10 +1,13 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from torchvision import transforms
 
-from preproc import prepare_dataset, data_from_folder
 from args import parser
+from dataset import spectrogramDataset
+from helper import get_normalise_coefficients
 from model import Model
+from preproc import prepare_dataset, data_from_folder, transform_spec
 
 
 def main():
@@ -18,7 +21,18 @@ def main():
     if args.verbosity:
         print("data extracted\n")
 
+    # get means and std from training predictors
+    train_means, train_stds = get_normalise_coefficients(train_preds)
+
+    # define transforms
+    transform = transforms.compose(
+        transforms.Resize(224),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=train_means, std=train_stds)
+    )
     # create dictionary of dataloaders and datasizes for train, val and test
+    train_dataset = spectrogramDataset(train_preds, train_labels, tr)
+
     train_dataloader, train_datasize = prepare_dataset(
         train_preds,
         train_labels,

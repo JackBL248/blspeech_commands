@@ -1,7 +1,6 @@
 import numpy as np
 import librosa
 from pathlib import Path
-from torchvision import transforms
 
 from config import Config
 from spectrogram import delta_spec, extract_features, preemphasis
