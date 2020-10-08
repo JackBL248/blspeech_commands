@@ -64,3 +64,19 @@ def data_from_folder(folder_path, deltas=False):
         preds_list.append(preds)
         labels_list.append(label)
     return preds_list, labels_list
+
+
+def normalise_spec(spec, means, stds):
+    '''
+    Normalise each channel of the spectrogram.
+    -----------------------
+    Args:
+    - spec (np.array, should be shape (3, 224, 224))
+    - means (np.array, should be shape (3, 1, 1))
+    - stds (np.array, should be shape (3, 1, 1))
+
+    Returns: Normalised spectrogram
+    -----------------------
+    '''
+    spec = (spec - means) / stds
+    return spec
