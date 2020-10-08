@@ -66,17 +66,19 @@ def data_from_folder(folder_path, deltas=False):
     return preds_list, labels_list
 
 
-def normalise_spec(spec, means, stds):
+class normaliseSpectrogram(object):
     '''
-    Normalise each channel of the spectrogram.
+    Functor for normalising each channel of the spectrogram.
     -----------------------
-    Args:
-    - spec (np.array, should be shape (3, 224, 224))
+    Attrs:
     - means (np.array, should be shape (3, 1, 1))
     - stds (np.array, should be shape (3, 1, 1))
-
-    Returns: Normalised spectrogram
     -----------------------
     '''
-    spec = (spec - means) / stds
-    return spec
+    def __init__(self, means, stds):
+        self.means = means
+        self.stds = stds
+
+    def __call__(self, spec):
+        spec = (spec - self.means) / self.stds
+        return spec
