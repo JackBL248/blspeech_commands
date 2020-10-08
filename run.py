@@ -12,7 +12,7 @@ from preproc import (
     data_from_folder,
     normaliseSpectrogram,
     resizeSpectrogram,
-    flip_dimensions
+    flipDimensions
 )
 
 
@@ -39,7 +39,7 @@ def main():
     # define transforms
     transform = transforms.Compose([
         normaliseSpectrogram(train_means, train_stds),
-        flip_dimensions(),
+        flipDimensions(),
         resizeSpectrogram(),
         transforms.ToTensor(),
     ])
