@@ -40,7 +40,6 @@ def preprocess_datapoint(
         feats = np.array([spec, d_spec, dd_spec])
     else:  # by using the same spectrogram for each of the three channels
         feats = np.array([spec, spec, spec])
-        feats
     label = get_class_from_filename(wavfile)
     return feats, label
 
