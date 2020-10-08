@@ -63,7 +63,7 @@ def main():
     # define model architecture, dropout, cost function and optimizer
     model = Model(args.model, args.dropout, device, args.log)
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.params(), lr=args.lr)
+    optimizer = optim.Adam(model.parameters(), lr=args.lr)
 
     # write the model arch, lr and dropout to file
     with open(args.log, "a+") as f:
