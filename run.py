@@ -11,9 +11,9 @@ def main():
     args = parser.parse_args()
 
     # extract train, val and test data
-    train_preds, train_labels = data_from_folder(args.train_folder)
-    val_preds, val_labels = data_from_folder(args.val_folder)
-    test_preds, test_labels = data_from_folder(args.test_folder)
+    train_preds, train_labels = data_from_folder(args.train_folder, args.delta)
+    val_preds, val_labels = data_from_folder(args.val_folder, args.delta)
+    test_preds, test_labels = data_from_folder(args.test_folder, args.delta)
 
     if args.verbosity:
         print("data extracted\n")
