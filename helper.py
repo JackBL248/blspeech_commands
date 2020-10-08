@@ -1,6 +1,3 @@
-import numpy as np
-from skimage.transform import resize
-
 from config import Config
 
 
