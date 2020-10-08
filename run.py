@@ -42,9 +42,9 @@ def main():
     val_dataset = spectrogramDataset(val_preds, val_labels, transform)
     test_dataset = spectrogramDataset(test_preds, test_labels, transform)
 
-    train_dataloader = data.DataLoader(train_dataset, args.batch_size, True)
-    val_dataloader = data.DataLoader(val_dataset, args.batch_size, False)
-    test_dataloader = data.DataLoader(test_dataset, args.batch_size, False)
+    train_dataloader = data.DataLoader(train_dataset, args.batch, True)
+    val_dataloader = data.DataLoader(val_dataset, args.batch, False)
+    test_dataloader = data.DataLoader(test_dataset, args.batch, False)
 
     dataloaders = {
         "train": train_dataloader,

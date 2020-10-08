@@ -24,7 +24,7 @@ parser.add_argument('--epochs', default=50, type=int,
                     help='number of total epochs to run')
 parser.add_argument('--patience', default=15, type=int,
                     help='early stopping patience')
-parser.add_argument('-b', '--batch-size', default=16, type=int,
+parser.add_argument('-b', '--batch', default=16, type=int,
                     help='mini-batch size (default: 16)')
 parser.add_argument('--lr', '--learning-rate', default=0.001, type=float,
                     help='initial learning rate')
