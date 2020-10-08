@@ -122,6 +122,7 @@ class Model(object):
 
                 # Iterate over data.
                 for inputs, labels in dataloaders[phase]:
+                    print(phase)
                     inputs = inputs.to(self.device)
                     labels = labels.to(self.device)
 
