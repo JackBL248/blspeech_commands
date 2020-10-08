@@ -1,12 +1,11 @@
 import numpy as np
 import librosa
-import torch
 from pathlib import Path
-from torch import utils
+from torchvision import transforms
 
 from config import Config
 from spectrogram import delta_spec, extract_features, preemphasis
-from helper import get_class_from_filename, resize_preds
+from helper import get_class_from_filename
 
 
 def preprocess_datapoint(
@@ -20,9 +19,9 @@ def preprocess_datapoint(
     Generate predictors (stft) and targets
     and resize predictors
     -----------------------
-    Input: wavfile
+    Args: wavfile (path)
 
-    Output: features, integer label
+    Returns: features (np.array), label (int)
     -----------------------
     '''
     # Read in audio
@@ -50,9 +49,9 @@ def data_from_folder(folder_path):
     '''
     Get preprocessed data and labels from folder.
     -----------------------
-    Input: folder path
+    Args: folder path (str)
 
-    Output: predictors and labels
+    Returns: predictors and labels
     -----------------------
     '''
     data_path = Path(folder_path)
@@ -72,9 +71,9 @@ def find_normalise_coefficients(train_preds):
     '''
     Finds the mean and std for channels from th
     -----------------------
-    Input: training predictors
+    Args: training predictors (list)
 
-    Output: mean and std for each channel
+    Returns: mean and std for each channel
     -----------------------
     '''
     training_mean = np.mean(train_preds, axis=(0, 2, 3))
@@ -82,27 +81,21 @@ def find_normalise_coefficients(train_preds):
     return training_mean, training_std
 
 
-def prepare_dataset(preds, labels, batch_size, shuffle=True):
+def transform_spec(means, stds):
     '''
-    Create PyTorch data loaders from preds and labels
+    Performs following transforms on spectrogram data:
+        Resize to (224,224)
+        Convert to torch.Tensor type
+        Normalize
     -----------------------
-    Args: predictors and labels, batch_size(int), shuffle(boolean)
+    Args:
+        - means (np.array)
+        - stds (np.array)
 
-    Output: dataloader
+    Returns: Composition of Torchvision transforms
     -----------------------
     '''
-    # Resize data
-    preds = resize_preds(preds)
-    # Convert data to tensor
-    preds = torch.Tensor(preds)
-    labels = torch.Tensor(labels)
-    # Convert labels to type long
-    labels = torch.Tensor.long(labels)
-    # Create dataset and dataloader
-    dataset = utils.TensorDataset(preds, labels)
-    dataloader = utils.DataLoader(
-        dataset,
-        batch_size=batch_size,
-        shuffle=shuffle
+    transform = transforms.compose(
+        transforms.Resize(224),
+        transforms.ToTensor()
     )
-    return dataloader
