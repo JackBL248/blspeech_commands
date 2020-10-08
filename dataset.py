@@ -14,7 +14,7 @@ class spectrogramDataset(data.Dataset):
         spectrogram = self.transform(self.preds[index])
         # convert label to torch.Tensor
         label = torch.Tensor([self.labels[index]])
-        label = label.long()
+        label = torch.Tensor.long(label)
         print(label)
         return spectrogram, label
 
