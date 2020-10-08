@@ -108,5 +108,8 @@ class flipDimensions(object):
     Flips the dimensions of the spectrogram from (3,n,n) to (n,n,3)
     To be added to Torch tranform.Compose list.
     '''
-    def __call__(spec):
+    def __init__(self):
+        pass
+
+    def __call__(self, spec):
         return spec.transpose(2, 1, 0)
