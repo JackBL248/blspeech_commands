@@ -8,7 +8,12 @@ from args import parser
 from dataset import spectrogramDataset
 from helper import get_normalise_coefficients
 from model import Model
-from preproc import data_from_folder, normaliseSpectrogram, resizeSpectrogram
+from preproc import (
+    data_from_folder,
+    normaliseSpectrogram,
+    resizeSpectrogram,
+    flip_dimensions
+)
 
 
 def main():
@@ -34,8 +39,9 @@ def main():
     # define transforms
     transform = transforms.Compose([
         normaliseSpectrogram(train_means, train_stds),
+        flip_dimensions(),
         resizeSpectrogram(),
-        # transforms.ToTensor(),
+        transforms.ToTensor(),
     ])
     # create dictionary of dataloaders and datasizes for train, val and test
     train_dataset = spectrogramDataset(train_preds, train_labels, transform)

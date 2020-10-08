@@ -69,7 +69,7 @@ def data_from_folder(folder_path, deltas=False):
 
 class normaliseSpectrogram(object):
     '''
-    Functor for normalising each channel of the spectrogram.
+    Normalises each channel of the spectrogram.
     To be added to Torch tranform.Compose list.
     -----------------------
     Attrs:
@@ -88,16 +88,24 @@ class normaliseSpectrogram(object):
 
 class resizeSpectrogram(object):
     '''
-    Functor for resizing the spectrogram.
+    Resizes the spectrogram.
     To be added to Torch tranform.Compose list.
     -----------------------
     Attrs:
     - factor (tuple)
     -----------------------
     '''
-    def __init__(self, factor=(3, 224, 224)):
+    def __init__(self, factor=(224, 224)):
         self.factor = factor
 
     def __call__(self, spec):
         spec = resize(spec, self.factor)
         return spec
+
+
+def flip_dimensions(spec):
+    '''
+    Flips the dimensions of the spectrogram from (3,n,n) to (n,n,3)
+    To be added to Torch tranform.Compose list.
+    '''
+    return spec.transpose(2, 0, 1)
