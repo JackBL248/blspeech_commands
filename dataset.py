@@ -9,7 +9,6 @@ class spectrogramDataset(data.Dataset):
 
     def __getitem__(self, index):
         # prepare spectrogram for input into model
-        print(self.labels[index])
         spectrogram = self.transform(self.preds[index])
         # convert label to torch.Tensor
         return spectrogram, float(self.labels[index])

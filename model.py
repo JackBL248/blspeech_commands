@@ -127,7 +127,6 @@ class Model(object):
 
                     inputs = inputs.to(self.device)
                     labels = labels.to(self.device)
-                    print(labels.shape)
 
                     # zero the parameter gradients
                     optimizer.zero_grad()
