@@ -1,13 +1,14 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import torch.utils.data as data
 from torchvision import transforms
 
 from args import parser
 from dataset import spectrogramDataset
 from helper import get_normalise_coefficients
 from model import Model
-from preproc import prepare_dataset, data_from_folder, transform_spec
+from preproc import prepare_dataset, data_from_folder
 
 
 def main():
@@ -18,12 +19,20 @@ def main():
     val_preds, val_labels = data_from_folder(args.val_folder, args.delta)
     test_preds, test_labels = data_from_folder(args.test_folder, args.delta)
 
-    if args.verbosity:
+    if args.verbose:
         print("data extracted\n")
 
     # get means and std from training predictors
     train_means, train_stds = get_normalise_coefficients(train_preds)
 
+    if args.verbose:
+        print("training data means: \n")
+        print(train_means)
+        print("\n")
+        print("training data stds: \n")
+        print(train_stds) 
+        print("\n")
+   
     # define transforms
     transform = transforms.compose(
         transforms.Resize(224),
@@ -31,26 +40,14 @@ def main():
         transforms.Normalize(mean=train_means, std=train_stds)
     )
     # create dictionary of dataloaders and datasizes for train, val and test
-    train_dataset = spectrogramDataset(train_preds, train_labels, tr)
+    train_dataset = spectrogramDataset(train_preds, train_labels, transform)
+    val_dataset = spectrogramDataset(val_preds, val_labels, transform)
+    test_dataset = spectrogramDataset(test_preds, test_labels, transform)
 
-    train_dataloader, train_datasize = prepare_dataset(
-        train_preds,
-        train_labels,
-        args.batch_size,
-        True
-    )
-    val_dataloader, val_datasize = prepare_dataset(
-        val_preds,
-        val_labels,
-        args.batch_size,
-        False
-    )
-    test_dataloader, test_datasize = prepare_dataset(
-        test_preds,
-        test_labels,
-        args.batch_size,
-        False
-    )
+    train_dataloader = data.DataLoader(train_dataset, args.batch_size, True)
+    val_dataloader = data.DataLoader(val_dataset, args.batch_size, False)
+    test_dataloader = data.DataLoader(test_dataset, args.batch_size, False)
+
     dataloaders = {
         "train": train_dataloader,
         "val": val_dataloader,
@@ -60,7 +57,7 @@ def main():
         "val": val_datasize,
     }
 
-    if args.verbosity:
+    if args.verbose:
         print("dataloaders created\n")
 
     # set CUDA as device if available
