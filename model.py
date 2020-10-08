@@ -124,7 +124,7 @@ class Model(object):
                 for inputs, labels in dataloaders[phase]:
                     inputs = inputs.to(self.device)
                     labels = labels.to(self.device)
-                    print(labels)
+                    print(labels.shape)
 
                     # zero the parameter gradients
                     optimizer.zero_grad()
