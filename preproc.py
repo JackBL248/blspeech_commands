@@ -92,11 +92,10 @@ class resizeSpectrogram(object):
     To be added to Torch tranform.Compose list.
     -----------------------
     Attrs:
-    - means (np.array, should be shape (3, 1, 1))
-    - stds (np.array, should be shape (3, 1, 1))
+    - factor (tuple)
     -----------------------
     '''
-    def __init__(self, factor):
+    def __init__(self, factor=(3, 224, 224)):
         self.factor = factor
 
     def __call__(self, spec):
