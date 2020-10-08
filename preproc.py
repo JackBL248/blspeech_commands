@@ -65,25 +65,3 @@ def data_from_folder(folder_path, deltas=False):
         preds_list.append(preds)
         labels_list.append(label)
     return preds_list, labels_list
-
-
-def transform_spec(means, stds):
-    '''
-    Performs following transforms on spectrogram data:
-        Resize to (224,224)
-        Convert to torch.Tensor type
-        Normalize
-    -----------------------
-    Args:
-        - means (np.array)
-        - stds (np.array)
-
-    Returns: Composition of Torchvision transforms
-    -----------------------
-    '''
-    transform = transforms.compose(
-        transforms.Resize(224),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=means, std=stds)
-    )
-    return transform
