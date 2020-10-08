@@ -1,6 +1,7 @@
 import numpy as np
 import librosa
 from pathlib import Path
+from skimage.transform import resize
 
 from config import Config
 from spectrogram import delta_spec, extract_features, preemphasis
@@ -69,6 +70,7 @@ def data_from_folder(folder_path, deltas=False):
 class normaliseSpectrogram(object):
     '''
     Functor for normalising each channel of the spectrogram.
+    To be added to Torch tranform.Compose list.
     -----------------------
     Attrs:
     - means (np.array, should be shape (3, 1, 1))
@@ -81,4 +83,22 @@ class normaliseSpectrogram(object):
 
     def __call__(self, spec):
         spec = (spec - self.means) / self.stds
+        return spec
+
+
+class resizeSpectrogram(object):
+    '''
+    Functor for resizing the spectrogram.
+    To be added to Torch tranform.Compose list.
+    -----------------------
+    Attrs:
+    - means (np.array, should be shape (3, 1, 1))
+    - stds (np.array, should be shape (3, 1, 1))
+    -----------------------
+    '''
+    def __init__(self, factor):
+        self.factor = factor
+
+    def __call__(self, spec):
+        spec = resize(spec, self.factor)
         return spec
