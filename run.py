@@ -50,10 +50,6 @@ def main():
         "train": train_dataloader,
         "val": val_dataloader,
     }
-    datasizes = {
-        "train": len(train_dataloader),
-        "val": len(val_dataloader),
-    }
 
     if args.verbose:
         print("dataloaders created\n")
@@ -77,7 +73,6 @@ def main():
         criterion,
         optimizer,
         dataloaders,
-        datasizes,
         args.epochs,
         args.patience
     )
