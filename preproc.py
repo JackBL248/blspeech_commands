@@ -67,20 +67,6 @@ def data_from_folder(folder_path, deltas=False):
     return preds_list, labels_list
 
 
-def find_normalise_coefficients(train_preds):
-    '''
-    Finds the mean and std for channels from th
-    -----------------------
-    Args: training predictors (list)
-
-    Returns: mean and std for each channel
-    -----------------------
-    '''
-    training_mean = np.mean(train_preds, axis=(0, 2, 3))
-    training_std = np.std(train_preds, axis=(0, 2, 3))
-    return training_mean, training_std
-
-
 def transform_spec(means, stds):
     '''
     Performs following transforms on spectrogram data:
