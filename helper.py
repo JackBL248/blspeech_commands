@@ -1,3 +1,5 @@
+import numpy as np
+
 from config import Config
 
 
@@ -21,3 +23,17 @@ def get_class_from_filename(filename):
     # get the integer label
     label = Config.CLASSES_DICT[str_label]
     return label
+
+
+def get_normalise_coefficients(train_preds):
+    '''
+    Finds the mean and std for channels from th
+    -----------------------
+    Args: training predictors (list)
+
+    Returns: mean and std for each channel
+    -----------------------
+    '''
+    training_mean = np.mean(train_preds, axis=(0, 2, 3))
+    training_std = np.std(train_preds, axis=(0, 2, 3))
+    return training_mean, training_std
