@@ -23,7 +23,9 @@ def main():
         print("data extracted\n")
 
     # get means and std from resized training predictors
-    train_means, train_stds = get_normalise_coefficients(train_preds)
+    resizer = transforms.Resize(224)
+    resized_train_preds = [resizer(pred) for pred in train_preds]
+    train_means, train_stds = get_normalise_coefficients(resized_train_preds)
 
     if args.verbose:
         print("training data means:")
@@ -33,9 +35,9 @@ def main():
 
     # define transforms
     transform = transforms.Compose(
-        transforms.ToTensor(),
-        transforms.Normalize(mean=train_means, std=train_stds),
         transforms.Resize(224),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=train_means, std=train_stds)
     )
     # create dictionary of dataloaders and datasizes for train, val and test
     train_dataset = spectrogramDataset(train_preds, train_labels, transform)
