@@ -24,6 +24,8 @@ def main():
     val_preds, val_labels = data_from_folder(args.val_folder, args.delta)
     test_preds, test_labels = data_from_folder(args.test_folder, args.delta)
 
+    print(train_labels[:5])
+
     if args.verbose:
         print("data extracted\n")
 
