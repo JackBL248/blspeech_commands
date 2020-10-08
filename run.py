@@ -8,7 +8,7 @@ from args import parser
 from dataset import spectrogramDataset
 from helper import get_normalise_coefficients
 from model import Model
-from preproc import data_from_folder
+from preproc import data_from_folder, normaliseSpectrogram
 
 
 def main():
@@ -22,10 +22,8 @@ def main():
     if args.verbose:
         print("data extracted\n")
 
-    # get means and std from resized training predictors
-    resizer = transforms.Resize(224)
-    resized_train_preds = [resizer(pred) for pred in train_preds]
-    train_means, train_stds = get_normalise_coefficients(resized_train_preds)
+    # get means and std from training predictors
+    train_means, train_stds = get_normalise_coefficients(train_preds)
 
     if args.verbose:
         print("training data means:")
@@ -35,9 +33,9 @@ def main():
 
     # define transforms
     transform = transforms.Compose(
-        transforms.Resize(224),
+        normaliseSpectrogram(train_means, train_stds),
         transforms.ToTensor(),
-        transforms.Normalize(mean=train_means, std=train_stds)
+        transforms.Resize(224),
     )
     # create dictionary of dataloaders and datasizes for train, val and test
     train_dataset = spectrogramDataset(train_preds, train_labels, transform)
