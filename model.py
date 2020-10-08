@@ -122,6 +122,9 @@ class Model(object):
 
                 # Iterate over data.
                 for inputs, labels in dataloaders[phase]:
+                    # convert labels to type Tensor.long
+                    labels = torch.Tensor.long(torch.Tensor(labels))
+                    
                     inputs = inputs.to(self.device)
                     labels = labels.to(self.device)
                     print(labels.shape)
