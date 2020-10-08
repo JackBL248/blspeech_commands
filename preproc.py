@@ -97,5 +97,7 @@ def transform_spec(means, stds):
     '''
     transform = transforms.compose(
         transforms.Resize(224),
-        transforms.ToTensor()
+        transforms.ToTensor(),
+        transforms.Normalize(mean=means, std=stds)
     )
+    return transform
