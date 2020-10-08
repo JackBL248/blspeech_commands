@@ -62,7 +62,6 @@ def main():
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     # define model architecture, dropout, cost function and optimizer
     model = Model(args.model, args.dropout, device, args.log)
-    print(help(model))
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.model.params(), lr=args.lr)
 
