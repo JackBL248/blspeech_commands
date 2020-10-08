@@ -10,6 +10,11 @@ parser.add_argument('--val-folder', default="toy_dataset/val", type=str,
 parser.add_argument('--test-folder', default="toy_dataset/test", type=str,
                     help='path to test folder')
 
+# ========================= Preprocess Configs ==========================
+parser.add_argument('-d', '--delta', default=False, type=bool,
+                    help='whether to use delta and double delta spectrograms\
+                    to fill the two other channels')
+
 # ========================= Model Configs ==========================
 parser.add_argument('--model-arch', default="resnet18", type=str,
                     help='Type of CNN architecture')
