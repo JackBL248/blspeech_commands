@@ -26,12 +26,10 @@ def main():
     train_means, train_stds = get_normalise_coefficients(train_preds)
 
     if args.verbose:
-        print("training data means: \n")
+        print("training data means:")
         print(train_means)
-        print("\n")
-        print("training data stds: \n")
+        print("training data stds:")
         print(train_stds)
-        print("\n")
 
     # define transforms
     transform = transforms.compose(
