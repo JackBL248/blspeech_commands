@@ -78,7 +78,7 @@ def main():
         optimizer,
         dataloaders,
         datasizes,
-        args.num_epochs,
+        args.epochs,
         args.patience
     )
 
