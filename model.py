@@ -24,7 +24,7 @@ class Model(object):
             )
             self.model = self.model.to(self.device)
 
-        if model_type == "resnet18":
+        elif model_type == "resnet18":
             self.model = models.resnet18(pretrained=False)
             num_ftrs = self.model.fc.in_features
             classifier = nn.Sequential(
@@ -37,7 +37,7 @@ class Model(object):
             self.model.fc = classifier
             self.model = self.model.to(self.device)
 
-        if model_type == "resnet34":
+        elif model_type == "resnet34":
             self.model = models.resnet34(pretrained=False)
             num_ftrs = self.model.fc.in_features
             classifier = nn.Sequential(
@@ -50,7 +50,7 @@ class Model(object):
             self.model.fc = classifier
             self.model = self.model.to(self.device)
 
-        if model_type == "resnet50":
+        elif model_type == "resnet50":
             self.model = models.resnet50(pretrained=False)
             num_ftrs = self.model.fc.in_features
             classifier = nn.Sequential(
@@ -63,7 +63,7 @@ class Model(object):
             self.model.fc = classifier
             self.model = self.model.to(self.device)
 
-        if model_type == "densenet121":
+        elif model_type == "densenet121":
             self.model = models.densenet121(pretrained=False)
             classifier = nn.Sequential(
                 nn.Dropout(dropout),
