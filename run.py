@@ -32,7 +32,7 @@ def main():
         print(train_stds)
 
     # define transforms
-    transform = transforms.compose(
+    transform = transforms.Compose(
         transforms.Normalize(mean=train_means, std=train_stds),
         transforms.Resize(224),
         transforms.ToTensor(),
