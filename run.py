@@ -8,7 +8,7 @@ from args import parser
 from dataset import spectrogramDataset
 from helper import get_normalise_coefficients
 from model import Model
-from preproc import prepare_dataset, data_from_folder
+from preproc import data_from_folder
 
 
 def main():
@@ -30,9 +30,9 @@ def main():
         print(train_means)
         print("\n")
         print("training data stds: \n")
-        print(train_stds) 
+        print(train_stds)
         print("\n")
-   
+
     # define transforms
     transform = transforms.compose(
         transforms.Resize(224),
@@ -53,8 +53,8 @@ def main():
         "val": val_dataloader,
     }
     datasizes = {
-        "train": train_datasize,
-        "val": val_datasize,
+        "train": len(train_dataloader),
+        "val": len(val_dataloader),
     }
 
     if args.verbose:
