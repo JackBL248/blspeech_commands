@@ -45,7 +45,7 @@ def preprocess_datapoint(
     return feats, label
 
 
-def data_from_folder(folder_path):
+def data_from_folder(folder_path, deltas=False):
     '''
     Get preprocessed data and labels from folder.
     -----------------------
@@ -61,7 +61,7 @@ def data_from_folder(folder_path):
     labels_list = []
     # iterate through files and append preds and labels to lists
     for audiof in audiofiles:
-        preds, label = preprocess_datapoint(audiof)
+        preds, label = preprocess_datapoint(audiof, deltas=deltas)
         preds_list.append(preds)
         labels_list.append(label)
     return preds_list, labels_list
