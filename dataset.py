@@ -7,6 +7,7 @@ class spectrogramDataset(data.Dataset):
         self.preds = preds
         self.labels = labels
         self.transform = transform
+        print(len(self.labels))
 
     def __getitem__(self, index):
         # prepare spectrogram for input into model
