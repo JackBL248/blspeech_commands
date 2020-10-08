@@ -68,27 +68,18 @@ def data_from_folder(folder_path):
     return preds_list, labels_list
 
 
-def normalise_datasets(train_preds, val_preds, test_preds):
+def find_normalise_coefficients(train_preds):
     '''
-    Normalise all predictors based on the mean and standard
-    deviation of the training predictors
+    Finds the mean and std for channels from th
     -----------------------
-    Input: train, validation and test predictors
+    Input: training predictors
 
-    Output: normalised train, validation and test predictors
+    Output: mean and std for each channel
     -----------------------
     '''
-    # Calculate mean and standard deviation of training predictors
-    tr_mean = np.mean(train_preds, axis=0)
-    tr_std = np.std(train_preds, axis=0)
-    # Subtract mean and divide by standard deviation for normalised predictors
-    train_preds = np.subtract(train_preds, tr_mean)
-    train_preds = np.divide(train_preds, tr_std)
-    val_preds = np.subtract(val_preds, tr_mean)
-    val_preds = np.divide(val_preds, tr_std)
-    test_preds = np.subtract(test_preds, tr_mean)
-    test_preds = np.divide(test_preds, tr_std)
-    return train_preds, val_preds, test_preds
+    training_mean = np.mean(train_preds, axis=(0, 2, 3))
+    training_std = np.std(train_preds, axis=(0, 2, 3))
+    return training_mean, training_std
 
 
 def prepare_dataset(preds, labels, batch_size, shuffle=True):
