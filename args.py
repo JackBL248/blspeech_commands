@@ -28,7 +28,7 @@ parser.add_argument('-b', '--batch-size', default=16, type=int,
                     help='mini-batch size (default: 16)')
 parser.add_argument('--lr', '--learning-rate', default=0.001, type=float,
                     help='initial learning rate')
-parser.add_argument('--drouput', default=0.1, type=float,
+parser.add_argument('--dropout', default=0.1, type=float,
                     help='model dropout')
 
 # ========================= Log Configs ==========================
