@@ -32,7 +32,7 @@ parser.add_argument('--dropout', default=0.1, type=float,
                     help='model dropout')
 
 # ========================= Log Configs ==========================
-parser.add_argument('--log-file', default="log.txt", type=str,
+parser.add_argument('--log', default="log.txt", type=str,
                     help='Destination file for logging results')
 parser.add_argument('-v', '--verbose', default=False, type=bool,
                     help='whether to print updates on data preprocessing')
