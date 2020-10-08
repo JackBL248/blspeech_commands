@@ -34,6 +34,7 @@ def main():
     # define transforms
     transform = transforms.Compose([
         normaliseSpectrogram(train_means, train_stds),
+        transforms.ToPILImage(),
         transforms.Resize(224),
         transforms.ToTensor(),
     ])
