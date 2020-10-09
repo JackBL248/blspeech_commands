@@ -34,4 +34,4 @@ def view_spec_from_file(wavfile):
     # Process data
     spec, label = preprocess_datapoint(wavfile)
     # view spectrogram
-    view_spec(spec)
+    view_spec(spec, label)
