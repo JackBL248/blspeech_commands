@@ -15,6 +15,7 @@ def view_spec(spec, label):
     '''
     spec = spec.transpose(2, 1, 0)
     spec = resize(spec, (224, 224))
+    spec = rotate(spec, 180)
     spec -= np.min(spec)
     spec /= np.max(spec)
 
