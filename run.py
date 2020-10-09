@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.utils.data as data
 from torchvision import transforms
+from pathlib import Path
 
 from args import parser
 from dataset import spectrogramDataset
@@ -19,10 +20,14 @@ from preproc import (
 def main():
     args = parser.parse_args()
 
+    trainfolder = Path.joinpath(args.datafolder, "train")
+    valfolder = Path.joinpath(args.datafolder, "val")
+    testfolder = Path.joinpath(args.datafolder, "test")
+
     # extract train, val and test data
-    train_preds, train_labels = data_from_folder(args.trainfolder, args.delta)
-    val_preds, val_labels = data_from_folder(args.valfolder, args.delta)
-    test_preds, test_labels = data_from_folder(args.testfolder, args.delta)
+    train_preds, train_labels = data_from_folder(trainfolder, args.delta)
+    val_preds, val_labels = data_from_folder(valfolder, args.delta)
+    test_preds, test_labels = data_from_folder(testfolder, args.delta)
 
     if args.verbose:
         print("data extracted\n")
