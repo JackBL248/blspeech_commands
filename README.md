@@ -19,7 +19,7 @@ python run.py --datafolder new_data  --delta True --model alexnet \
               --log new_log.txt --verbose True
 ```
 
-Note: use of GPU is advised
+**Note**: use of GPU (ideally CUDA) is advised
 
 ## References
 
