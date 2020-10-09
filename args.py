@@ -30,6 +30,8 @@ parser.add_argument('--lr', '--learning-rate', default=0.001, type=float,
                     help='initial learning rate')
 parser.add_argument('--dropout', default=0.1, type=float,
                     help='model dropout')
+parser.add_argument('--workers', default=4, type=int,
+                    help='number of workers')
 
 # ========================= Log Configs ==========================
 parser.add_argument('--log', default="log.txt", type=str,
