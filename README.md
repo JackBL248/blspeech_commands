@@ -8,11 +8,17 @@ You can download the Google Speech Commands dataset from https://www.kaggle.com/
 The data should be split into train, validation and test folders, with the rootfolder in the main directory, e.g.:
 
 |--blspeech_commands
+
 |   |--data
+
 |   |   |--train
+
 |   |   |--val
+
 |   |   |--test
+
 |   |--README.md
+
 
 etc.
 
