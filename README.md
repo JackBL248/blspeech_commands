@@ -9,15 +9,15 @@ The data should be split into train, validation and test folders, with the rootf
 
 |--blspeech_commands
 
-|   |--data
+|       |--data
 
-|   |   |--train
+|       |       |--train
 
-|   |   |--val
+|       |       |--val
 
-|   |   |--test
+|       |       |--test
 
-|   |--README.md
+|       |--README.md
 
 
 etc.
