@@ -13,12 +13,9 @@ The data should be split into train, validation and test folders, with the rootf
 To train and test a model, you simply need to call "python run.py" in the terminal. This will run with default arguments. The following command gives an example of all arguments that can be changed:
 
 `python run.py --datafolder new_data  --delta True --model alexnet \
-
---batch 32 --epochs 25 --patience 10 \
-
---lr 0.03 --dropout --0.25 --workers 2 \
-
---log new_log.txt --verbose True`
+              --batch 32 --epochs 25 --patience 10 \
+              --lr 0.03 --dropout --0.25 --workers 2 \
+              --log new_log.txt --verbose True`
 
 
 ## References
