@@ -12,6 +12,8 @@ The data should be split into train, validation and test folders, with the rootf
 ## Training and Testing
 To train and test a model, you simply need to call "python run.py" in the terminal. This will run with default arguments.
 
+`python `
+
 
 ## References
 
