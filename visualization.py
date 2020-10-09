@@ -5,7 +5,7 @@ from config import Config
 from preproc import preprocess_datapoint
 
 
-def view_spec(spec):
+def view_spec(spec, label):
     '''
     Views spectrogram using matplotlib.
     -----------------------
@@ -17,7 +17,7 @@ def view_spec(spec):
     spec_copy = rotate(spec_copy, 90)
 
     plt.imshow(spec_copy)
-    plt.title(str_label)
+    plt.title(label)
     plt.xticks([])
     plt.yticks([])
     plt.show()
@@ -35,4 +35,4 @@ def view_spec_from_file(wavfile):
     str_label = Config.CLASSES_DICT_INVERTED[label]
 
     # view spectrogram
-    view_spec(spec, label)
+    view_spec(spec, str_label)
