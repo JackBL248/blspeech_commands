@@ -20,7 +20,7 @@ def view_spec(spec, label):
     spec -= np.min(spec)
     spec /= np.max(spec)
 
-    plt.imshow(spec_copy)
+    plt.imshow(spec)
     plt.title(label)
     plt.xticks([])
     plt.yticks([])
