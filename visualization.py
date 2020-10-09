@@ -32,11 +32,8 @@ def view_spec_from_file(wavfile):
     '''
     # Process data
     print(wavfile)
-    # spec, label = preprocess_datapoint(wavfile)
-    # print(spec.shape)
-    # str_label = Config.CLASSES_DICT_INVERTED[label]
-    # print(Config.CLASSES_DICT_INVERTED)
-    # print(str_label)
+    spec, label = preprocess_datapoint(wavfile)
+    str_label = Config.CLASSES_DICT_INVERTED[label]
 
     # # view spectrogram
-    # view_spec(spec, str_label)
+    view_spec(spec, str_label)
