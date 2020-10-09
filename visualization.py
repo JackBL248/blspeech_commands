@@ -13,10 +13,8 @@ def view_spec(spec, label):
     Input: Spectrogram (np.array)
     -----------------------
     '''
-    print(spec.shape)
     spec = spec.transpose(2, 1, 0)
     spec = resize(spec, (224, 224))
-    spec = rotate(spec, 90)
     spec -= np.min(spec)
     spec /= np.max(spec)
 
