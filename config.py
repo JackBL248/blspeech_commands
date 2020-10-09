@@ -4,6 +4,7 @@ class Config():
     with open("classes.txt", "r") as f:
         classes = [command.strip() for command in f.readlines()]
     CLASSES_DICT = {command[1]: command[0] for command in enumerate(classes)}
+    CLASSES_DICT_INVERTED = {command[0]: command[1] for command in enumerate(classes)}
     NUM_CLASSES = len(CLASSES_DICT)
 
     # Data vars
