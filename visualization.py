@@ -16,6 +16,7 @@ def view_spec(spec, label):
     spec_copy = spec.transpose(2, 1, 0)
     spec_copy = resize(spec_copy, (224, 224))
     spec_copy = rotate(spec_copy, 90)
+    print(spec_copy[0])
 
     plt.imshow(spec_copy)
     plt.title(label)
