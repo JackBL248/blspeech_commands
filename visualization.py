@@ -12,6 +12,7 @@ def view_spec(spec, label):
     Input: Spectrogram (np.array)
     -----------------------
     '''
+    print(spec.shape)
     spec_copy = spec.transpose(2, 1, 0)
     spec_copy = resize(spec, (224, 224))
     spec_copy = rotate(spec_copy, 90)
