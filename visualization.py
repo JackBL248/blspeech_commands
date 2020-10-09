@@ -37,5 +37,5 @@ def view_spec_from_file(wavfile):
     print(Config.CLASSES_DICT_INVERTED)
     print(str_label)
 
-    # view spectrogram
-    view_spec(spec, str_label)
+    # # view spectrogram
+    # view_spec(spec, str_label)
