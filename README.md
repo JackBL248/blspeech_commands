@@ -1,7 +1,7 @@
 # Speech Command Classification
 Classification of speech commands from the Google Speech Commands dataset using spectrogram extraction for preprocessing, and offering the use of Alexnet [1], Resnet18, -32 and -50 [2], and Densenet121 [3].
 
-![image](/Users/JackBL/Documents/data_science_exploits/speech_commands/bird_spec.png) ![image](/Users/JackBL/Documents/data_science_exploits/speech_commands/forward_spec.png) ![image](/Users/JackBL/Documents/data_science_exploits/speech_commands/go_spec.png) ![image](/Users/JackBL/Documents/data_science_exploits/speech_commands/stop_spec.png) ![image](/Users/JackBL/Documents/data_science_exploits/speech_commands/up_spec.png) ![image](/Users/JackBL/Documents/data_science_exploits/speech_commands/visual_spec.png)
+![image](images/bird_spec.png) ![image](images/forward_spec.png) ![image](images/go_spec.png) ![image](images/stop_spec.png) ![image](images/up_spec.png) ![image](images/visual_spec.png)
 
 ## Data preparation
 You can download the Google Speech Commands dataset from https://www.kaggle.com/c/tensorflow-speech-recognition-challenge/data or from https://ai.googleblog.com/2017/08/launching-speech-commands-dataset.html. Or, you can use the toy_dataset included in this repo.
