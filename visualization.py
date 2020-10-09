@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 from skimage.transform import rotate, resize
 
 from config import Config
@@ -13,10 +14,11 @@ def view_spec(spec, label):
     -----------------------
     '''
     print(spec.shape)
-    spec_copy = spec.transpose(2, 1, 0)
-    spec_copy = resize(spec_copy, (224, 224))
-    spec_copy = rotate(spec_copy, 90)
-    print(spec_copy[0])
+    spec = spec.transpose(2, 1, 0)
+    spec = resize(spec, (224, 224))
+    spec = rotate(spec, 90)
+    spec -= np.min(spec)
+    spec /= np.max(spec)
 
     plt.imshow(spec_copy)
     plt.title(label)
